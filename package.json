@@ -1,0 +1,39 @@
+{
+  "name": "generate-commit",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "generate-commit": "dist/index.js"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "generate",
+    "ai",
+    "commit"
+  ],
+  "author": "clianor <ejrgus94160@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/cli-progress": "^3.11.5",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.10.4",
+    "ai-commit": "^2.1.1",
+    "cli-progress": "^3.12.0",
+    "dotenv": "^16.3.1",
+    "inquirer": "^9.2.12",
+    "ollama": "^0.3.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
