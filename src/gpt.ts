@@ -1,6 +1,7 @@
 import { Ollama } from "ollama";
 import { SingleBar } from "cli-progress";
 import { MODEL, PROVIDER } from "./config";
+import { getPrompt } from "./helpers";
 
 export const generateCommit = async (diff: string): Promise<string> => {
   const ollama = new Ollama();
@@ -38,55 +39,34 @@ export const generateCommit = async (diff: string): Promise<string> => {
   // 2. ollama message generate
   console.log("\n========= prompting ollama... =========");
 
-  const prompt = `
-"---" "Write a git commit message following the "Udacity Git Commit Message Style" based on the changes obtained through the git diff.
-Please adhere to the following options.
+  const response = await fetch("http://localhost:11434/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      // prompt: getPrompt(diff),
+      prompt: diff,
+      stream: false,
+      template: `[INST] You are a helpful code assistant. Your task is to generate a valid JSON object based on the given information:
+name: John
+lastname: Smith
+address: #1 Samuel St.
+Just generate the JSON object without explanations:
+[/INST]`,
+      options: {
+        temperature: 0.2,
+      },
+    }),
+  });
 
-- Tone: Rude
-- Style: Precise
-- Reader level: Expert
-- Length: In one sentence
-- Perspective: Developer
-- Respond in English
-- Just provide the conclusion
----
-The Type is contained within the title and can be one of these types:
-  - feat: A new feature
-  - fix: A bug fix
-  - docs: Changes to documentation
-  - style: Formatting, missing semi colons, etc; no code change
-  - refactor: Refactoring production code
-  - test: Adding tests, refactoring test; no production code change
-  - chore: Updating build tasks, package manager configs, etc; no production code change
+  if (!response.ok)
+    throw new Error(`Failed to generate text: ${await response.text()}`);
 
-
-The Subject:
-Subjects should be no greater than 50 characters, should begin with a capital letter and do not end with a period.
-Use an imperative tone to describe what a commit does, rather than what it did. For example, use change; not changed or changes.
-
-
-The Body:
-Not all commits are complex enough to warrant a body, therefore it is optional and only used when a commit requires a bit of explanation and context.
-Use the body to explain the what and why of a commit, not the how.
-When writing a body, the blank line between the title and the body is required and you should limit the length of each line to no more than 72 characters.
-Additionally, the main body must be brief when explaining the content and reasons and must be written within 72 characters.
-
-Write the commit message following the template:
-[Type]: [Subject]
-[Body]
-
-
-Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit.
-
-The diffs are as follows:
-${diff}
-  `.trim();
-
-  let content = "";
-  for await (const token of ollama.generate(MODEL, prompt)) {
-    process.stdout.write(token);
-    content += token;
-  }
+  const responseJson = await response.json();
+  const content = responseJson.response;
+  console.log(content);
 
   console.log("\n========= prompting ai done! =========");
 

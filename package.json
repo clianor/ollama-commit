@@ -1,5 +1,5 @@
 {
-  "name": "generate-commit",
+  "name": "ollama-commit",
   "version": "0.0.1",
   "type": "module",
   "description": "",
@@ -7,7 +7,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "bin": {
-    "generate-commit": "dist/index.js"
+    "ollama-commit": "dist/index.js"
   },
   "files": [
     "dist/**"
@@ -18,9 +18,10 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "generate",
+    "ollama",
     "ai",
-    "commit"
+    "commit",
+    "ollama"
   ],
   "author": "clianor <ejrgus94160@gmail.com>",
   "license": "MIT",
