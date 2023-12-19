@@ -49,12 +49,24 @@ export const generateCommit = async (diff: string): Promise<string> => {
       // prompt: getPrompt(diff),
       prompt: diff,
       stream: false,
-      template: `[INST] You are a helpful code assistant. Your task is to generate a valid JSON object based on the given information:
-name: John
-lastname: Smith
-address: #1 Samuel St.
-Just generate the JSON object without explanations:
-[/INST]`,
+      template: `<s>[INST] You are a helpful code assistant. Your task is to generate a valid JSON object based on the given information. So for instance the following:
+
+      name: John
+      lastname: Smith
+      address: #1 Samuel St.
+      
+      would be converted to:[/INST]
+      {
+      "address": "#1 Samuel St.",
+      "lastname": "Smith",
+      "name": "John"
+      }
+      </s>
+      [INST]
+      name: Ted
+      lastname: Pot
+      address: #1 Bisson St.
+      [/INST]`,
       options: {
         temperature: 0.2,
       },
