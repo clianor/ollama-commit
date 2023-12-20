@@ -5,6 +5,7 @@ The commits you will write will have a commit title and one or more comments.
 Be concise, precise, and use complete sentences in the present tense.
 commit messages must follow conventional commits.
 Don't say anything other than the message format.
+Respond in an assertive tone.
 
 message format should be:
 <type>(<optional scope>): <commit message>
