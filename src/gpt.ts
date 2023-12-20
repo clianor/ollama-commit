@@ -1,7 +1,7 @@
 import { Ollama } from "ollama";
 import { SingleBar } from "cli-progress";
 import { MODEL, PROVIDER } from "./config";
-import { getPrompt } from "./helpers";
+import { defaultPromptTemplate } from "./template";
 
 export const generateCommit = async (diff: string): Promise<string> => {
   const ollama = new Ollama();
@@ -46,29 +46,11 @@ export const generateCommit = async (diff: string): Promise<string> => {
     },
     body: JSON.stringify({
       model: MODEL,
-      // prompt: getPrompt(diff),
       prompt: diff,
       stream: false,
-      template: `<s>[INST] You are a helpful code assistant. Your task is to generate a valid JSON object based on the given information. So for instance the following:
-
-      name: John
-      lastname: Smith
-      address: #1 Samuel St.
-      
-      would be converted to:[/INST]
-      {
-      "address": "#1 Samuel St.",
-      "lastname": "Smith",
-      "name": "John"
-      }
-      </s>
-      [INST]
-      name: Ted
-      lastname: Pot
-      address: #1 Bisson St.
-      [/INST]`,
+      template: defaultPromptTemplate,
       options: {
-        temperature: 0.2,
+        temperature: 0.7,
       },
     }),
   });
@@ -77,10 +59,10 @@ export const generateCommit = async (diff: string): Promise<string> => {
     throw new Error(`Failed to generate text: ${await response.text()}`);
 
   const responseJson = await response.json();
-  const content = responseJson.response;
+  const content = responseJson.response.trim();
   console.log(content);
 
   console.log("\n========= prompting ai done! =========");
 
-  return content.trim();
+  return content;
 };

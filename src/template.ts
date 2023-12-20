@@ -1,34 +1,24 @@
-// export const defaultPromptTemplate = [
-//   // "suggest commit messages based on the following diff:",
-//   "suggest 5 commit message based on the following diff:",
-//   "{{diff}}",
-//   "",
-//   "commit messages should:",
-//   " - follow conventional commits",
-//   " - don't say anything unnecessary besides the commit",
-//   " - message format should be: <type>: <description>",
-
-//   "",
-//   "examples:",
-//   " - fix: add password regex pattern",
-//   " - feat: add new test cases",
-// ].join("\n");\
-
 export const defaultPromptTemplate = `
-`;
+<s>[INST]I want you to act like the git commit author.
+I'll type git diff and your job is to convert that into a useful commit message.
+The commits you will write will have a commit title and one or more comments.
+Be concise, precise, and use complete sentences in the present tense.
+commit messages must follow conventional commits.
+Don't say anything other than the message format.
 
-// export const defaultPromptTemplate = [
-//   "suggest 1 commit messages based on the following diff:",
-//   "{{diff}}",
-//   "",
-//   "[INST]",
-//   "commit messages should:",
-//   " - follow conventional commits",
-//   " - message format should be: <type>[scope]: <description>",
+message format should be:
+<type>(<optional scope>): <commit message>
+<commit description>
+[/INST]
+examples:
+fix(app): prevent racing of requests
 
-//   "",
-//   "examples:",
-//   " - fix(authentication): add password regex pattern",
-//   " - feat(storage): add new test cases",
-//   "[/INST]",
-// ].join("\n");
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+</s>
+[INST]
+{{ .Prompt }}
+[/INST]`.trim();

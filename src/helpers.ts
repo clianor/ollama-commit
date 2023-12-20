@@ -1,5 +1,3 @@
-import { defaultPromptTemplate } from "./template";
-
 export const getArgs = () => {
   const args = process.argv.slice(2);
   const result: Record<string, any> = {};
@@ -10,11 +8,4 @@ export const getArgs = () => {
   }
 
   return result;
-};
-
-export const getPrompt = (diff: string): string => {
-  return defaultPromptTemplate.replace(
-    "{{diff}}",
-    ["```", diff, "```"].join("\n")
-  );
 };
