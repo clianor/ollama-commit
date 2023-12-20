@@ -2,7 +2,7 @@
   "name": "ollama-commit",
   "version": "0.0.1",
   "type": "module",
-  "description": "",
+  "description": "Commit message generator with Ollama",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -25,6 +25,7 @@
   ],
   "author": "clianor <ejrgus94160@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/clianor/ollama-commit",
   "dependencies": {
     "@types/cli-progress": "^3.11.5",
     "@types/inquirer": "^9.0.7",
