@@ -17,8 +17,7 @@
     "dev": "tsup --watch",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major",
-    "publish": "npm publish"
+    "version:major": "npm version major"
   },
   "keywords": [
     "ollama",
