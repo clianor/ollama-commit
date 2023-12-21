@@ -14,11 +14,6 @@ message format should be:
 examples:
 fix(app): prevent racing of requests
 
-Introduce a request id and a reference to latest request. Dismiss
-incoming responses other than from latest request.
-
-Remove timeouts which were used to mitigate the racing issue but are
-obsolete now.
 </s>
 [INST]
 {{ .Prompt }}
