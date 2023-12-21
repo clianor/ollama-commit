@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { checkGitRepository, createCommit, getDiff } from "./git";
 import { MODEL, PROVIDER } from "./config";
 import { generateCommit } from "./gpt";

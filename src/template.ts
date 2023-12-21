@@ -7,6 +7,7 @@ The commits you will write will have a commit title and one or more comments.
 Be concise, precise, and use complete sentences in the present tense.
 commit messages must follow conventional commits.
 Don't say anything other than the message format.
+The message format must not be repeated.
 Respond in an assertive tone.
 Please respond with message and description in ${RESPONSE_LANGUAGE}.
 
