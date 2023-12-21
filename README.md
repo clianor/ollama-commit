@@ -27,7 +27,7 @@ To use ollama-commit, ollama must be installed.
 - [ ] Support for force option
 - [ ] Check default template
 - [ ] Support for template suggestion
-- [ ] Support for responses in different languages
+- [x] Support for responses in different languages
 - [ ] Support for remote ollama
 
 ## License
