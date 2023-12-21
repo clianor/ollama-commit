@@ -3,11 +3,11 @@
   "version": "0.0.3",
   "type": "module",
   "description": "Commit message generator with Ollama",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "ollama-commit": "dist/index.js"
+    "ollama-commit": "dist/index.cjs"
   },
   "files": [
     "dist/**"

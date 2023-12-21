@@ -12,7 +12,8 @@ Please respond with message and description in ${RESPONSE_LANGUAGE}.
 
 message format should be:
 <type>(<optional scope>): <commit message>
-<commit description>
+- <optional commit description>
+- <optional commit description>
 [/INST]
 examples:
 fix(app): prevent racing of requests

@@ -1,9 +1,9 @@
-import { Ollama } from "ollama";
 import { SingleBar } from "cli-progress";
 import { MODEL, PROVIDER } from "./config";
 import { defaultPromptTemplate } from "./template";
 
 export const generateCommit = async (diff: string): Promise<string> => {
+  const { Ollama } = await import("ollama");
   const ollama = new Ollama();
 
   // 1. ollama model pulling

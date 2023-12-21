@@ -1,7 +1,6 @@
-import inquirer from "inquirer";
-import { generateCommit } from "./gpt";
 import { checkGitRepository, createCommit, getDiff } from "./git";
 import { MODEL, PROVIDER } from "./config";
+import { generateCommit } from "./gpt";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL);
@@ -13,6 +12,7 @@ const main = async () => {
 
   const message = await generateCommit(diff);
 
+  const inquirer = (await import("inquirer")).default as any;
   const answer = await inquirer.prompt([
     {
       type: "confirm",
@@ -30,4 +30,4 @@ const main = async () => {
   createCommit(message);
 };
 
-await main().catch((error) => console.error(error));
+main().catch((error) => console.error(error));

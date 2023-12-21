@@ -5,9 +5,10 @@ export default defineConfig((options) => ({
     index: "./src/index.ts",
   },
   outDir: "dist",
-  format: ["esm"],
+  format: ["cjs", "esm"],
   clean: true,
   sourcemap: true,
   minify: !options.watch,
   target: "node16",
+  dts: true,
 }));
