@@ -1,14 +1,11 @@
 import { RESPONSE_LANGUAGE } from "./config";
 
 export const defaultPromptTemplate = `
-<s>[INST]I want you to act like the git commit author.
-I'll type git diff and your job is to convert that into a useful commit message.
-The commits you will write will have a commit title and one or more comments.
-Be concise, precise, and use complete sentences in the present tense.
-commit messages must follow conventional commits.
-Don't say anything other than the message format.
-The message format must not be repeated.
-Respond in an assertive tone.
+<s>[INST]I hope you find it useful to write Git commit messages based on the git diff input.
+A commit consists of a title and one or more comments, and should be written in concise, clear sentences.
+Commit messages are written in the present tense and must follow convention.
+Please make sure not to repeat the message format and not mention anything else.
+I hope you respond with a firm attitude.
 Please respond with message and description in ${RESPONSE_LANGUAGE}.
 
 message format should be:
