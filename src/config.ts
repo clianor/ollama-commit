@@ -12,3 +12,6 @@ export const PROVIDER = "ollama";
  * https://ollama.ai/library
  */
 export const MODEL = args.model || process.env.MODEL || "mistral";
+
+export const RESPONSE_LANGUAGE =
+  args.language || process.env.LANGUAGE || "English";
