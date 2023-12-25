@@ -5,7 +5,7 @@ import { MODEL, PROVIDER } from "./config";
 import { generateCommit } from "./gpt";
 
 console.log("COMMIT PROVIDER", PROVIDER);
-console.log("COMMIT MODEL", MODEL);
+console.log("COMMIT MODEL", MODEL, "\n");
 
 const main = async () => {
   checkGitRepository();
@@ -20,7 +20,7 @@ const main = async () => {
       type: "confirm",
       name: "continue",
       message: "Do you want to continue?",
-      default: true,
+      default: false,
     },
   ]);
 
