@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
-import { getArgs } from "./helpers";
+
+import { getArgs, stringToBoolean } from "./helpers";
 
 dotenv.config();
 
@@ -15,3 +16,7 @@ export const MODEL = args.model || process.env.MODEL || "mistral";
 
 export const RESPONSE_LANGUAGE =
   args.language || process.env.LANGUAGE || "English";
+
+export const SIGNATURE = stringToBoolean(
+  args.signature || process.env.SIGNATURE
+);

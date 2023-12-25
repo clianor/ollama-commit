@@ -1,5 +1,6 @@
 import { SingleBar } from "cli-progress";
-import { MODEL, PROVIDER } from "./config";
+
+import { MODEL, PROVIDER, SIGNATURE } from "./config";
 import { defaultPromptTemplate } from "./template";
 
 export const generateCommit = async (diff: string): Promise<string> => {
@@ -37,6 +38,11 @@ export const generateCommit = async (diff: string): Promise<string> => {
   }
 
   // 2. ollama message generate
+  const options = {
+    temperature: 0.9,
+    top_k: 40,
+    top_p: 0.7,
+  };
   console.log("\n========= prompting ollama... =========");
 
   const response = await fetch("http://localhost:11434/api/generate", {
@@ -49,9 +55,7 @@ export const generateCommit = async (diff: string): Promise<string> => {
       prompt: diff,
       stream: false,
       template: defaultPromptTemplate,
-      options: {
-        temperature: 0.7,
-      },
+      options,
     }),
   });
 
@@ -59,10 +63,13 @@ export const generateCommit = async (diff: string): Promise<string> => {
     throw new Error(`Failed to generate text: ${await response.text()}`);
 
   const responseJson = await response.json();
-  const content = responseJson.response.trim();
-  console.log(content);
+  let message = responseJson.response.trim();
+  if (SIGNATURE) {
+    message += "\n\nmade by ollama-commit";
+  }
+  console.log(message);
 
   console.log("\n========= prompting ai done! =========");
 
-  return content;
+  return message;
 };

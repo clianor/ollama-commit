@@ -9,3 +9,8 @@ export const getArgs = () => {
 
   return result;
 };
+
+export const stringToBoolean = (str?: string): boolean => {
+  if (!str) return false;
+  return str.toLowerCase() === "true";
+};
