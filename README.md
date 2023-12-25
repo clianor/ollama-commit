@@ -19,8 +19,8 @@ To use ollama-commit, ollama must be installed.
 
 ## Options
 
---model: Choose the model you want from ollama’s models. `(default: mistral)`
---signature: Add Olama's signature to the footer. `(default: false)`
+--model: Choose the model you want from ollama’s models. `(default: mistral)`  
+--signature: Add Olama's signature to the footer. `(default: false)`  
 
 ## Roadmap
 
