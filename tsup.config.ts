@@ -4,16 +4,16 @@ export default defineConfig((options) => ({
   entry: {
     index: "./src/index.ts",
   },
-  outExtension({ format }) {
+  outExtension() {
     return {
-      js: format === "esm" ? ".mjs" : `.${format}`,
+      js: ".cjs",
     };
   },
   outDir: "dist",
-  format: ["cjs", "esm"],
+  format: ["cjs"],
   clean: true,
-  sourcemap: true,
+  sourcemap: false,
   minify: !options.watch,
   target: "node16",
-  dts: true,
+  dts: false,
 }));
