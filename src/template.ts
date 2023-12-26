@@ -6,6 +6,7 @@ export const defaultPromptTemplate = `
 I want you to act as a commit message generator.
 I will provide the output through the 'git diff --staged' command, and you are to convert it into a commit message.
 I don't want any responses other than the commit message, so please only output the commit message.
+I want the first line of the commit message to always be under 50 characters.
 I only want one commit message to be output.
 Please output in ${RESPONSE_LANGUAGE}.
 [/INST]
