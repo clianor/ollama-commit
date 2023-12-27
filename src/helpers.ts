@@ -1,16 +1,14 @@
 export const getArgs = () => {
   const args = process.argv.slice(2);
-  const result: Record<string, any> = {};
-
-  while (args.length > 0) {
-    const [key, value] = args.splice(0, 2);
-    if (key.includes("--")) result[key.replace("--", "")] = value;
-  }
-
-  return result;
-};
-
-export const stringToBoolean = (str?: string): boolean => {
-  if (!str) return false;
-  return str.toLowerCase() === "true";
+  return args.reduce((result, arg, index) => {
+    if (arg.startsWith("--")) {
+      const key = arg.replace("--", "");
+      let value: string | boolean = false;
+      if (args[index + 1] && !args[index + 1].startsWith("--")) {
+        value = args[index + 1];
+      }
+      result[key] = value;
+    }
+    return result;
+  }, {} as Record<string, string | boolean>);
 };
