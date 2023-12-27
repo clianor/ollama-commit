@@ -45,7 +45,6 @@ export const generateCommit = async (diff: string): Promise<string> => {
 
   const responseJson = await response.json();
   let message = responseJson.response.trim();
-  console.log({ SIGNATURE });
   if (SIGNATURE) message += "\n\nmade by ollama-commit";
   console.log(message);
 
