@@ -2,7 +2,7 @@
 
 import { checkGitRepository, createCommit, getDiff } from "./git";
 import { MODEL, PROVIDER } from "./config";
-import { generateCommit } from "./gpt";
+import { generateCommit } from "./utils/generateCommit";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL, "\n");

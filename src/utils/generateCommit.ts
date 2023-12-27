@@ -1,5 +1,5 @@
-import { SIGNATURE } from "./config";
-import { generateCommitMessage, pullModel } from "./helpers";
+import { SIGNATURE } from "../config";
+import { generateCommitMessage, pullModel } from "../helpers";
 
 export const generateCommit = async (diff: string): Promise<string> => {
   await pullModel();
