@@ -19,17 +19,23 @@ To use ollama-commit, ollama must be installed.
 
 ## Options
 
---model: Choose the model you want from ollama’s models. `(default: "mistral")`  
---signature: Add Olama's signature to the footer. `(default: false)`  
+- `--model`: Choose the model you want from ollama’s models. `(default: "mistral")`
+  - example: `npx ollama-commit --model mistral`
+- `--language`: Choose the language you want. `(default: "Egnlish")`
+  - example: `npx ollama-commit --language English`
+- `--signature`: Add Olama's signature to the footer.
+  - example: `npx ollama-commit --signature`
 
 ## Roadmap
 
-- [ ] Support for max diff length
-- [ ] Support for force option
-- [ ] Check default template
-- [ ] Support for template suggestion
+- [x] Support for multiple models
 - [x] Support for responses in different languages
+- [ ] Support for model pulling selection
+- [ ] Support for force option
+- [ ] Support for max diff length
+- [ ] Support for template suggestion
 - [ ] Support for remote ollama
+- [ ] Check default template
 
 ## License
 
