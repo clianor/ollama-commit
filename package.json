@@ -20,8 +20,8 @@
     "version:major": "npm version major"
   },
   "keywords": [
-    "ollama",
     "ai",
+    "git",
     "commit",
     "ollama"
   ],
