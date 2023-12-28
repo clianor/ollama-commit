@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { createCommit } from "./git";
 import { MODEL, PROVIDER } from "./config";
 import { generateCommit } from "./utils/generateCommit";
 import { checkGitRepository } from "./utils/checkGitRepository";
 import { getDiff } from "./utils/getDiff";
+import { createCommit } from "./utils/createCommit";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL, "\n");
