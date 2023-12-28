@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { MODEL, PROVIDER } from "./config";
+import { MODEL, PROVIDER, SIGNATURE } from "./config";
 import { generateCommit } from "./utils/generateCommit";
 import { checkGitRepository } from "./utils/checkGitRepository";
 import { getDiff } from "./utils/getDiff";
@@ -13,9 +13,10 @@ console.log("COMMIT MODEL", MODEL, "\n");
 const main = async () => {
   checkGitRepository();
   const diff = getDiff();
-  const message = await generateCommit(diff);
+  let message = await generateCommit(diff);
   console.log("\n========= prompting ollama... =========\n");
   console.log(message);
+  if (SIGNATURE) message += "\n\nmade by ollama-commit";
   console.log("\n========= prompting ai done! =========");
   const isContinue = await confirmContinue();
   if (!isContinue) {
