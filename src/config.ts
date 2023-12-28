@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 
-import { getArgs } from "./helpers";
 import { DEFAULT_LANGUAGE, DEFAULT_MODEL, DEFAULT_PROVIDER } from "./constants";
+import { getArgs } from "./utils/getArgs";
 
 dotenv.config();
 

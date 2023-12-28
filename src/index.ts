@@ -5,7 +5,8 @@ import { checkGitRepository } from "./utils/checkGitRepository";
 import { getDiff } from "./utils/getDiff";
 import { createCommit } from "./utils/createCommit";
 import { confirmContinue } from "./utils/confirmContinue";
-import { generateCommitMessage, pullModel } from "./helpers";
+import { generateCommitMessage } from "./utils/generateCommitMessage";
+import { pullModel } from "./utils/pullModel";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL, "\n");
