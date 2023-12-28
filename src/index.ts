@@ -14,6 +14,9 @@ const main = async () => {
   checkGitRepository();
   const diff = getDiff();
   const message = await generateCommit(diff);
+  console.log("\n========= prompting ollama... =========\n");
+  console.log(message);
+  console.log("\n========= prompting ai done! =========");
   const isContinue = await confirmContinue();
   if (!isContinue) {
     console.log("Commit aborted by user 🙅‍♂️");

@@ -55,7 +55,6 @@ export const pullModel = async () => {
 
 export const generateCommitMessage = async (diff: string) => {
   const options = { temperature: 0.9, top_k: 40, top_p: 0.7 };
-  console.log("\n========= prompting ollama... =========");
 
   const response = await fetch("http://localhost:11434/api/generate", {
     method: "POST",
@@ -73,10 +72,5 @@ export const generateCommitMessage = async (diff: string) => {
     throw new Error(`Failed to generate text: ${await response.text()}`);
 
   const responseJson = await response.json();
-  let message = responseJson.response.trim();
-  console.log(message);
-
-  console.log("\n========= prompting ai done! =========");
-
-  return message;
+  return responseJson.response.trim();
 };
