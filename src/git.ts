@@ -1,17 +1,5 @@
 import { execSync } from "child_process";
 
-export const checkGitRepository = (): void => {
-  try {
-    execSync("git rev-parse --is-inside-work-tree", {
-      encoding: "utf8",
-      stdio: "ignore",
-    });
-  } catch (error) {
-    console.error("This is not a git repository");
-    process.exit(1);
-  }
-};
-
 export const getDiff = (maxDiffLength = 8000) => {
   const diff = execSync(
     "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml'"

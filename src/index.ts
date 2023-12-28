@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import { checkGitRepository, createCommit, getDiff } from "./git";
+import { createCommit, getDiff } from "./git";
 import { MODEL, PROVIDER } from "./config";
 import { generateCommit } from "./utils/generateCommit";
+import { checkGitRepository } from "./utils/checkGitRepository";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL, "\n");
@@ -11,7 +12,6 @@ const main = async () => {
   checkGitRepository();
 
   const diff = getDiff();
-
   const message = await generateCommit(diff);
 
   const inquirer = (await import("inquirer")).default as any;
