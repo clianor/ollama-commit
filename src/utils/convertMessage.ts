@@ -2,11 +2,11 @@ export const convertMessageToCommitFormat = (message: string): string => {
   const obj = JSON.parse(message);
 
   let commitMessage = `${obj.type}${obj.scope ? `(${obj.scope})` : ""}: ${
-    obj.subject
+    obj.title
   }`;
 
-  if (obj.description && obj.description.length > 0) {
-    commitMessage += "\n\n" + obj.description.join("\n");
+  if (obj.body && obj.body.length > 0) {
+    commitMessage += "\n\n" + obj.body.join("\n");
   }
 
   return commitMessage;

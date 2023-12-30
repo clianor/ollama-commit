@@ -30,4 +30,7 @@ const main = async () => {
   createCommit(message);
 };
 
-main().catch((error) => console.error(error));
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

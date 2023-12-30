@@ -1,9 +1,11 @@
 import { SingleBar } from "cli-progress";
-import { MODEL, PROVIDER } from "../config";
+import { API_HOST, MODEL, PROVIDER } from "../config";
 
 export const pullModel = async () => {
   const { Ollama } = await import("ollama");
-  const ollama = new Ollama();
+  const ollama = new Ollama({
+    address: API_HOST,
+  });
 
   const it = await ollama.pull(MODEL);
   let pullingResult = await it.next();
