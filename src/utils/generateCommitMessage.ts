@@ -17,7 +17,7 @@ export const generateCommitMessage = async (diff: string) => {
       top_p: 0.9,
     },
   })) {
-    process.stdout.write(token);
+    // process.stdout.write(token);
     content += token;
   }
 
