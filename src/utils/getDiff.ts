@@ -1,6 +1,8 @@
 import { execSync } from "child_process";
 
-export const getDiff = (maxDiffLength = 8000) => {
+import { DEFAULT_MAX_DIFF_LENGTH } from "../constants";
+
+export const getDiff = (maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) => {
   const diff = execSync(
     "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml'"
   ).toString();

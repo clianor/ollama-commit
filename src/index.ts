@@ -7,6 +7,7 @@ import { createCommit } from "./utils/createCommit";
 import { confirmContinue } from "./utils/confirmContinue";
 import { generateCommitMessage } from "./utils/generateCommitMessage";
 import { pullModel } from "./utils/pullModel";
+import { convertMessageToCommitFormat } from "./utils/convertMessage";
 
 console.log("COMMIT PROVIDER", PROVIDER);
 console.log("COMMIT MODEL", MODEL, "\n");
@@ -17,8 +18,9 @@ const main = async () => {
   await pullModel();
   let message = await generateCommitMessage(diff);
   console.log("\n========= prompting ollama... =========\n");
-  console.log(message);
+  message = convertMessageToCommitFormat(message);
   if (SIGNATURE) message += "\n\nmade by ollama-commit";
+  console.log(message);
   console.log("\n========= prompting ai done! =========");
   const isContinue = await confirmContinue();
   if (!isContinue) {
