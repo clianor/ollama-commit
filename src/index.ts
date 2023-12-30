@@ -28,6 +28,7 @@ const main = async () => {
     process.exit(1);
   }
   createCommit(message);
+  process.exit();
 };
 
 main().catch((error) => {
