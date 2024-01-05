@@ -25,6 +25,8 @@ To use ollama-commit, ollama must be installed.
   - example: `npx ollama-commit --language English`
 - `--signature`: Add Olama's signature to the footer.
   - example: `npx ollama-commit --signature`
+- `--verbose`: Output options for debugging.
+  - example: `npx ollama-commit --verbose`
 
 ## Roadmap
 
