@@ -21,7 +21,7 @@ To use ollama-commit, ollama must be installed.
 
 - `--model`: Choose the model you want from ollama’s models. `(default: "mistral")`
   - example: `npx ollama-commit --model mistral`
-- `--language`: Choose the language you want. `(default: "Egnlish")`
+- `--language`: Choose the language you want. `(default: "English")`
   - example: `npx ollama-commit --language English`
 - `--signature`: Add Olama's signature to the footer.
   - example: `npx ollama-commit --signature`
