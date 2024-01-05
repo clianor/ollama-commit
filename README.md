@@ -30,11 +30,11 @@ To use ollama-commit, ollama must be installed.
 
 - [x] Support for multiple models
 - [x] Support for responses in different languages
+- [x] Support for remote ollama
 - [ ] Support for model pulling selection
 - [ ] Support for force option
 - [ ] Support for max diff length
 - [ ] Support for template suggestion
-- [ ] Support for remote ollama
 - [ ] Check default template
 
 ## License
