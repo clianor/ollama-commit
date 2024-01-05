@@ -26,3 +26,4 @@ export const API_HOST =
  * Boolean configurations
  */
 export const SIGNATURE = args.signature ?? process.env.SIGNATURE;
+export const VERBOSE = args.verbose ?? process.env.VERBOSE;

@@ -1,4 +1,4 @@
-import { API_HOST, MODEL } from "../config";
+import { API_HOST, MODEL, VERBOSE } from "../config";
 import { defaultSystemMessage } from "../constants/prompt";
 import { removeEscapeCharacters } from "./removeEscapeCharacters";
 
@@ -18,9 +18,10 @@ export const generateCommitMessage = async (diff: string) => {
       top_p: 0.4,
     },
   })) {
-    // process.stdout.write(token);
+    if (VERBOSE) process.stdout.write(token);
     content += token;
   }
+  console.debug("\n\n");
 
   return removeEscapeCharacters(content);
 };

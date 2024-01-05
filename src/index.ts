@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { MODEL, PROVIDER, SIGNATURE } from "./config";
+import { MODEL, PROVIDER, SIGNATURE, VERBOSE } from "./config";
 import { checkGitRepository } from "./utils/checkGitRepository";
 import { getDiff } from "./utils/getDiff";
 import { createCommit } from "./utils/createCommit";
@@ -9,19 +9,25 @@ import { generateCommitMessage } from "./utils/generateCommitMessage";
 import { pullModel } from "./utils/pullModel";
 import { convertMessageToCommitFormat } from "./utils/convertMessage";
 
-console.log("COMMIT PROVIDER", PROVIDER);
-console.log("COMMIT MODEL", MODEL, "\n");
+if (!VERBOSE) {
+  console.debug = function () {};
+}
+
+console.debug("COMMIT PROVIDER", PROVIDER);
+console.debug("COMMIT MODEL", MODEL, "\n");
 
 const main = async () => {
   checkGitRepository();
   const diff = getDiff();
   await pullModel();
+  console.log();
+  console.debug("\n========= prompting ollama... =========\n");
   let message = await generateCommitMessage(diff);
-  console.log("\n========= prompting ollama... =========\n");
   message = convertMessageToCommitFormat(message);
   if (SIGNATURE) message += "\n\nmade by ollama-commit";
+  console.debug("\n========= result =========\n");
   console.log(message);
-  console.log("\n========= prompting ai done! =========");
+  console.debug("\n========= prompting ai done! =========");
   const isContinue = await confirmContinue();
   if (!isContinue) {
     console.log("Commit aborted by user 🙅‍♂️");
