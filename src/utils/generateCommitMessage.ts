@@ -12,9 +12,10 @@ export const generateCommitMessage = async (diff: string) => {
   for await (const token of ollama.generate(MODEL, diff, {
     system: defaultSystemMessage,
     parameters: {
-      temperature: 0.9,
-      top_k: 100,
-      top_p: 0.9,
+      temperature: 0,
+      num_ctx: 4096,
+      top_k: 20,
+      top_p: 0.4,
     },
   })) {
     // process.stdout.write(token);

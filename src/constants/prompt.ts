@@ -1,36 +1,21 @@
 import { RESPONSE_LANGUAGE } from "../config";
 
-export const defaultSystemMessage = `
-Generate a concise JSON response written in present tense for code differences using the specifications given below:
-JSON must have the following keys: type, scope, title, and body.
-Select the type that best describes git diff from the type-description JSON below:
-{
-   "docs": "Documentation only changes",
-   "style": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
-   "refactor": "A code change that neither fixes a bug nor adds a feature",
-   "perf": "A code change that improves performance",
-   "test": "Adding missing tests or correcting existing tests",
-   "build": "Changes that affect the build system or external dependencies",
-   "ci": "Changes to our CI configuration files and scripts",
-   "chore": "Other changes that don't modify src or test files",
-   "revert": "Reverts a previous commit",
-   "feat": "A new feature",
-   "fix": "A bug fix"
-}
-scope represents the scope of changes in a commit. scope is optional and is used to specify the scope affected by the commit, such as changed files, modules, components, etc.
-title creates a concise summary title for the commit. The first letter is capitalized and no periods are used.
-The body is the part that describes the details of the commit. You can describe in more detail the commit's changes, reasons, scope of impact, etc.
-
-You should respond in ${RESPONSE_LANGUAGE}.
-
-An example output is:
-{
-  "type": "fix",
-  "scope": "api",
-  "title": "prevent racing of requests",
-  "body": [
-    "Introduce a request id and a reference to latest request. Dismiss incoming responses other than from latest request.",
-    "Remove timeouts which were used to mitigate the racing issue but are obsolete now."
-  ]
-}
-`.trim();
+export const defaultSystemMessage = [
+  `You are a JSON constructor.`,
+  `The JSON you will generate should only contain the following keys: "type", "scope", "subject", and "body".`,
+  `It must not contain any keys except "type", "scope", "subject", and "body".`,
+  `The JSON you will generate will be used to generate commit messages according to "conventional commits".`,
+  `It should not respond with anything other than JSON, and should only respond with a single JSON object.`,
+  `However, the JSON object must not be an array.`,
+  `For "type", you must select an appropriate type such as "feat", "fix", "docs", "style", "refactor", "test", "chore", etc.`,
+  `"scope" is the part that indicates the scope in which the change occurred.`,
+  `"scope" usually refers to a specific module, file, function, etc. within a project.`,
+  `"subject" is the summary of the commit message.`,
+  `"subject" should concisely express the core changes of the commit and should be no longer than 50 characters.`,
+  `"subject" should be worded as concisely and clearly as possible so that other developers can quickly understand what the commit is about.`,
+  `"subject" is required.`,
+  `For "body", this is the part that describes the details of the commit in the present tense.`,
+  `If "body" is multiple sentences, it is expressed as a string array.`,
+  `"body" is optional.`,
+  `You must respond in ${RESPONSE_LANGUAGE}.`,
+].join(" ");
