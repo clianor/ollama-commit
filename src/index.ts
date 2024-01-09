@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { checkGitRepository } from "./utils/checkGitRepository";
+import { isGitRepository } from "./git/is-git-repository";
 import { getDiff } from "./utils/getDiff";
 import { createCommit } from "./utils/createCommit";
 import { confirmContinue } from "./utils/confirmContinue";
@@ -14,7 +14,11 @@ const main = async () => {
   logger.debug("COMMIT PROVIDER", PROVIDER);
   logger.debug("COMMIT MODEL", options.model, "\n");
 
-  checkGitRepository();
+  if (!isGitRepository()) {
+    logger.warn("This is not a git repository");
+    process.exit(1);
+  }
+
   const diff = getDiff();
   logger.debug("========= prompting ollama... =========");
   const promptResponse = await ollamaPropt(diff);

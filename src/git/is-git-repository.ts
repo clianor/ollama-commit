@@ -1,15 +1,13 @@
 import { execSync } from "child_process";
 
-import logger from "./logger";
-
-export const checkGitRepository = (): void => {
+export function isGitRepository() {
   try {
     execSync("git rev-parse --is-inside-work-tree", {
       encoding: "utf8",
       stdio: "ignore",
     });
+    return true;
   } catch (error) {
-    logger.warn("This is not a git repository");
-    process.exit(1);
+    return false;
   }
-};
+}
