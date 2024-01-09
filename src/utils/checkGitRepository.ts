@@ -1,5 +1,7 @@
 import { execSync } from "child_process";
 
+import logger from "./logger";
+
 export const checkGitRepository = (): void => {
   try {
     execSync("git rev-parse --is-inside-work-tree", {
@@ -7,7 +9,7 @@ export const checkGitRepository = (): void => {
       stdio: "ignore",
     });
   } catch (error) {
-    console.error("This is not a git repository");
+    logger.warn("This is not a git repository");
     process.exit(1);
   }
 };

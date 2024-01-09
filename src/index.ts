@@ -9,29 +9,25 @@ import { pullModel } from "./utils/pullModel";
 import { convertMessageToCommitFormat } from "./utils/convertMessage";
 import options from "./options";
 import { PROVIDER } from "./constants";
-
-if (!options.verbose) {
-  console.debug = function () {};
-}
-
-console.debug("COMMIT PROVIDER", PROVIDER);
-console.debug("COMMIT MODEL", options.model, "\n");
+import logger from "./utils/logger";
 
 const main = async () => {
+  logger.debug("COMMIT PROVIDER", PROVIDER);
+  logger.debug("COMMIT MODEL", options.model, "\n");
+
   checkGitRepository();
   const diff = getDiff();
   await pullModel();
-  console.log();
-  console.debug("\n========= prompting ollama... =========\n");
+  logger.debug("========= prompting ollama... =========");
   let message = await generateCommitMessage(diff);
   message = convertMessageToCommitFormat(message);
   if (options.signature) message += "\n\nmade by ollama-commit";
-  console.debug("\n========= result =========\n");
-  console.log(message);
-  console.debug("\n========= prompting ai done! =========");
+  logger.debug("========= result =========");
+  process.stdout.write(`${message}\n`);
+  logger.debug("========= prompting ai done! =========");
   const isContinue = await confirmContinue();
   if (!isContinue) {
-    console.log("Commit aborted by user 🙅‍♂️");
+    process.stdout.write("Commit aborted by user 🙅‍♂️\n");
     process.exit(1);
   }
   createCommit(message);
@@ -39,6 +35,6 @@ const main = async () => {
 };
 
 main().catch((error) => {
-  console.error(error);
+  logger.error(error);
   process.exit(1);
 });

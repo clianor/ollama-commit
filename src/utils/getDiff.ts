@@ -1,6 +1,7 @@
 import { execSync } from "child_process";
 
 import { DEFAULT_MAX_DIFF_LENGTH } from "../constants";
+import logger from "./logger";
 
 export const getDiff = (maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) => {
   const diff = execSync(
@@ -8,14 +9,14 @@ export const getDiff = (maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) => {
   ).toString();
 
   if (!diff) {
-    console.error(
+    logger.warn(
       "No staged changes found. Make sure there are changes and run `git add .` or use the `--auto-add-all`, `-a` option."
     );
     process.exit(1);
   }
 
   if (diff.length > maxDiffLength) {
-    console.error(
+    logger.warn(
       `The diff is too large (${diff.length} > ${maxDiffLength} chars) to write a commit message. Please consider splitting your changes into multiple commits.`
     );
     process.exit(1);

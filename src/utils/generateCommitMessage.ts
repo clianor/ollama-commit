@@ -21,7 +21,7 @@ export const generateCommitMessage = async (diff: string) => {
     if (options.verbose) process.stdout.write(token);
     content += token;
   }
-  console.debug("\n\n");
+  if (options.verbose) process.stdout.write("\n");
 
   return removeEscapeCharacters(content);
 };

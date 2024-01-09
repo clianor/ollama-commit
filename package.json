@@ -37,6 +37,7 @@
     "inquirer": "^9.2.12",
     "ollama": "^0.3.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "winston": "^3.11.0"
   }
 }
