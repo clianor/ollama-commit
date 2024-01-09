@@ -49,3 +49,6 @@ Options:
 ## License
 
 Ollama-Commit is licensed under the MIT License.
+
+[![npm version](https://badge.fury.io/js/ollama-commit.svg)](https://badge.fury.io/js/ollama-commit)
+[![Codeac](https://static.codeac.io/badges/2-733989087.svg "Codeac")](https://app.codeac.io/github/clianor/ollama-commit)
