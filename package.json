@@ -3,6 +3,10 @@
   "version": "0.3.3",
   "type": "module",
   "description": "Commit message generator with Ollama",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clianor/ollama-commit"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
