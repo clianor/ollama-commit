@@ -1,20 +1,22 @@
 import { SingleBar } from "cli-progress";
-import { API_HOST, MODEL, PROVIDER } from "../config";
+
+import options from "../options";
+import { PROVIDER } from "../constants";
 
 export const pullModel = async () => {
   const { Ollama } = await import("ollama");
   const ollama = new Ollama({
-    address: API_HOST,
+    address: options.api,
   });
 
-  const it = await ollama.pull(MODEL);
+  const it = await ollama.pull(options.model);
   let pullingResult = await it.next();
   if (!pullingResult.done) {
     pullingResult = await it.next();
 
     const progressBar = new SingleBar({
       format:
-        `${PROVIDER} - ${MODEL} pulling |` +
+        `${PROVIDER} - ${options.model} pulling |` +
         "{bar}" +
         "| {percentage}% || {value}/{total} Chunks",
       barCompleteChar: "\u2588",

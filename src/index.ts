@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { MODEL, PROVIDER, SIGNATURE, VERBOSE } from "./config";
 import { checkGitRepository } from "./utils/checkGitRepository";
 import { getDiff } from "./utils/getDiff";
 import { createCommit } from "./utils/createCommit";
@@ -8,13 +7,15 @@ import { confirmContinue } from "./utils/confirmContinue";
 import { generateCommitMessage } from "./utils/generateCommitMessage";
 import { pullModel } from "./utils/pullModel";
 import { convertMessageToCommitFormat } from "./utils/convertMessage";
+import options from "./options";
+import { PROVIDER } from "./constants";
 
-if (!VERBOSE) {
+if (!options.verbose) {
   console.debug = function () {};
 }
 
 console.debug("COMMIT PROVIDER", PROVIDER);
-console.debug("COMMIT MODEL", MODEL, "\n");
+console.debug("COMMIT MODEL", options.model, "\n");
 
 const main = async () => {
   checkGitRepository();
@@ -24,7 +25,7 @@ const main = async () => {
   console.debug("\n========= prompting ollama... =========\n");
   let message = await generateCommitMessage(diff);
   message = convertMessageToCommitFormat(message);
-  if (SIGNATURE) message += "\n\nmade by ollama-commit";
+  if (options.signature) message += "\n\nmade by ollama-commit";
   console.debug("\n========= result =========\n");
   console.log(message);
   console.debug("\n========= prompting ai done! =========");

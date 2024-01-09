@@ -1,4 +1,4 @@
-import { RESPONSE_LANGUAGE } from "../config";
+import options from "../options";
 
 export const defaultSystemMessage = [
   `You are a JSON constructor.`,
@@ -18,5 +18,5 @@ export const defaultSystemMessage = [
   `For "body", this is the part that describes the details of the commit in the present tense.`,
   `If "body" is multiple sentences, it is expressed as a string array.`,
   `"body" is optional.`,
-  `You must respond in ${RESPONSE_LANGUAGE}.`,
+  `You must respond in ${options.language}.`,
 ].join(" ");
