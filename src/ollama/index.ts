@@ -1,16 +1,16 @@
+import { SYSTEM_MESSAGE } from "../constants/prompt";
 import options from "../options";
-import { defaultSystemMessage } from "../constants/prompt";
-import { removeEscapeCharacters } from "./removeEscapeCharacters";
+import { removeEscapeCharacters } from "../utils/removeEscapeCharacters";
 
-export const generateCommitMessage = async (diff: string) => {
+export async function ollamaPropt(diff: string) {
   const { Ollama } = await import("ollama");
   const ollama = new Ollama({
     address: options.api,
   });
 
-  let content = "";
+  const chunks: string[] = [];
   for await (const token of ollama.generate(options.model, diff, {
-    system: defaultSystemMessage,
+    system: SYSTEM_MESSAGE,
     parameters: {
       temperature: 0,
       num_ctx: 4096,
@@ -19,9 +19,8 @@ export const generateCommitMessage = async (diff: string) => {
     },
   })) {
     if (options.verbose) process.stdout.write(token);
-    content += token;
+    chunks.push(token);
   }
   if (options.verbose) process.stdout.write("\n");
-
-  return removeEscapeCharacters(content);
-};
+  return removeEscapeCharacters(chunks.join(""));
+}

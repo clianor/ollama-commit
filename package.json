@@ -29,10 +29,8 @@
   "license": "MIT",
   "homepage": "https://github.com/clianor/ollama-commit",
   "dependencies": {
-    "@types/cli-progress": "^3.11.5",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.10.4",
-    "cli-progress": "^3.12.0",
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
     "ollama": "^0.3.0",
