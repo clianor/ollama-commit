@@ -1,6 +1,6 @@
 import { SYSTEM_MESSAGE } from "../constants/prompt";
 import options from "../options";
-import { removeEscapeCharacters } from "../utils/removeEscapeCharacters";
+import { removeEscapeCharacters } from "../utils/remove-escape-characters";
 
 export async function ollamaPropt(diff: string) {
   const { Ollama } = await import("ollama");

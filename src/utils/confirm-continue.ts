@@ -1,4 +1,4 @@
-export async function confirmContinue(): Promise<boolean> {
+export async function confirmContinue() {
   const inquirer = (await import("inquirer")).default as any;
   const answer = await inquirer.prompt([
     {

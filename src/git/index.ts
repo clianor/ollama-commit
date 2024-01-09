@@ -1,9 +1,20 @@
 import { execSync } from "child_process";
-
 import { DEFAULT_MAX_DIFF_LENGTH } from "../constants";
-import logger from "./logger";
+import logger from "../utils/logger";
 
-export const getDiff = (maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) => {
+export function isGitRepository() {
+  try {
+    execSync("git rev-parse --is-inside-work-tree", {
+      encoding: "utf8",
+      stdio: "ignore",
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export function getDiff(maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) {
   const diff = execSync(
     "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml'"
   ).toString();
@@ -23,4 +34,8 @@ export const getDiff = (maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) => {
   }
 
   return diff;
+}
+
+export const createCommit = (message: string) => {
+  execSync(`git commit -F -`, { input: message });
 };

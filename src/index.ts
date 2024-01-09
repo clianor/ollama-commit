@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
-import { isGitRepository } from "./git/is-git-repository";
-import { getDiff } from "./utils/getDiff";
-import { createCommit } from "./utils/createCommit";
-import { confirmContinue } from "./utils/confirmContinue";
-import { convertMessageToCommitFormat } from "./utils/convertMessage";
+import { confirmContinue } from "./utils/confirm-continue";
+import { convertMessageToCommitFormat } from "./utils/convert-message-to-commit-format";
 import options from "./options";
 import { PROVIDER } from "./constants";
 import logger from "./utils/logger";
 import { ollamaPropt } from "./ollama";
+import { isGitRepository, getDiff, createCommit } from "./git";
 
-const main = async () => {
+async function main() {
   logger.debug("COMMIT PROVIDER", PROVIDER);
   logger.debug("COMMIT MODEL", options.model, "\n");
 
@@ -20,21 +18,20 @@ const main = async () => {
   }
 
   const diff = getDiff();
-  logger.debug("========= prompting ollama... =========");
   const promptResponse = await ollamaPropt(diff);
-  let message = convertMessageToCommitFormat(promptResponse);
-  if (options.signature) message += "\n\nmade by ollama-commit";
-  logger.debug("========= result =========");
-  process.stdout.write(`${message}\n`);
-  logger.debug("========= prompting ai done! =========");
+  let commitMessage = convertMessageToCommitFormat(promptResponse);
+  if (options.signature) commitMessage += "\n\nmade by ollama-commit";
+  process.stdout.write(`========= result =========\n`);
+  process.stdout.write(`${commitMessage}\n`);
+
   const isContinue = await confirmContinue();
   if (!isContinue) {
     process.stdout.write("Commit aborted by user 🙅‍♂️\n");
     process.exit(1);
   }
-  createCommit(message);
+  createCommit(commitMessage);
   process.exit();
-};
+}
 
 main().catch((error) => {
   logger.error(error);
