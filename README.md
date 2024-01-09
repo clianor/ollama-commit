@@ -19,14 +19,21 @@ To use ollama-commit, ollama must be installed.
 
 ## Options
 
-- `--model`: Choose the model you want from ollama’s models. `(default: "mistral")`
-  - example: `npx ollama-commit --model mistral`
-- `--language`: Choose the language you want. `(default: "English")`
-  - example: `npx ollama-commit --language English`
-- `--signature`: Add Olama's signature to the footer.
-  - example: `npx ollama-commit --signature`
-- `--verbose`: Output options for debugging.
-  - example: `npx ollama-commit --verbose`
+```bash
+$ npx ollama-commit --help
+Usage: help [options]
+
+Automatic commit generator using Ollama.
+
+Options:
+  -V, --version              output the version number
+  -m, --model <model>        ollama model (default: "mistral")
+  -a, --api <api>            api host (default: "http://localhost:11434")
+  -l, --language <language>  response language (default: "English")
+  -s, --signature
+  -v, --verbose
+  -h, --help                 display help for command
+```
 
 ## Roadmap
 
