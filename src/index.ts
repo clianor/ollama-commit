@@ -33,7 +33,7 @@ async function main() {
   process.exit();
 }
 
-main().catch((error) => {
-  logger.error(error);
+main().catch((error: Error) => {
+  logger.error(error.message);
   process.exit(1);
 });

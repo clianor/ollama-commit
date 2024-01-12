@@ -19,9 +19,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "version:patch": "npm version patch",
-    "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:patch": "npm version patch && pnpm run build && pnpm publish",
+    "version:minor": "npm version minor && pnpm run build && pnpm publish",
+    "version:major": "npm version major && pnpm run build && pnpm publish"
   },
   "keywords": [
     "ai",
