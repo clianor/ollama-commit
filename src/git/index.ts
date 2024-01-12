@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import { DEFAULT_MAX_DIFF_LENGTH } from "../constants";
 import logger from "../utils/logger";
 
 export function checkGitRepository() {
@@ -13,7 +12,7 @@ export function checkGitRepository() {
   }
 }
 
-export function getDiff(maxDiffLength = DEFAULT_MAX_DIFF_LENGTH) {
+export function getDiff(maxDiffLength: number) {
   const diff = execSync(
     "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml'"
   ).toString();

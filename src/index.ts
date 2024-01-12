@@ -8,12 +8,14 @@ import { ollamaPropt } from "./ollama";
 import { checkGitRepository, getDiff, createCommit } from "./git";
 
 async function main() {
-  logger.info(`COMMIT PROVIDER: ${PROVIDER}`);
-  logger.info(`COMMIT MODEL: ${options.model}\n`);
+  logger.info(`AI PROVIDER: ${PROVIDER}`);
+  logger.info(`AI MODEL: ${options.model}`);
+  logger.info(`LANGUAGE: ${options.language}`);
+  logger.info(`MAX DIFF LENGTH: ${options.maxDiffLength}\n`);
 
   checkGitRepository();
 
-  const diff = getDiff();
+  const diff = getDiff(+options.maxDiffLength);
   logger.start("Generating commit message...\n");
   const promptResponse = await ollamaPropt(diff);
   let commitMessage = convertMessageToCommitFormat(promptResponse);
