@@ -2,15 +2,14 @@ import { execSync } from "child_process";
 import { DEFAULT_MAX_DIFF_LENGTH } from "../constants";
 import logger from "../utils/logger";
 
-export function isGitRepository() {
+export function checkGitRepository() {
   try {
     execSync("git rev-parse --is-inside-work-tree", {
       encoding: "utf8",
       stdio: "ignore",
     });
-    return true;
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 

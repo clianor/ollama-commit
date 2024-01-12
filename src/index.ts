@@ -6,16 +6,13 @@ import options from "./options";
 import { PROVIDER } from "./constants";
 import logger from "./utils/logger";
 import { ollamaPropt } from "./ollama";
-import { isGitRepository, getDiff, createCommit } from "./git";
+import { checkGitRepository, getDiff, createCommit } from "./git";
 
 async function main() {
   logger.debug(`COMMIT PROVIDER: ${PROVIDER}`);
   logger.debug(`COMMIT MODEL: ${options.model}\n`);
 
-  if (!isGitRepository()) {
-    logger.warn("This is not a git repository");
-    process.exit(1);
-  }
+  checkGitRepository();
 
   const diff = getDiff();
   const promptResponse = await ollamaPropt(diff);
