@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { confirmContinue } from "./utils/confirm-continue";
 import { convertMessageToCommitFormat } from "./utils/convert-message-to-commit-format";
 import options from "./options";
 import { PROVIDER } from "./constants";
@@ -20,9 +19,12 @@ async function main() {
   let commitMessage = convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
   logger.success(`✅ Commit message generation successful!\n`);
-  process.stdout.write(`${commitMessage}\n`);
+  process.stdout.write(`${commitMessage}\n\n`);
 
-  const isContinue = await confirmContinue();
+  const isContinue = await logger.prompt("Do you want to continue?", {
+    type: "confirm",
+    initial: false,
+  });
   if (!isContinue) {
     logger.info("Commit aborted by user 🙅‍♂️\n");
     process.exit(1);
