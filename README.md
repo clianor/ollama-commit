@@ -26,13 +26,14 @@ Usage: help [options]
 Automatic commit generator using Ollama.
 
 Options:
-  -V, --version              output the version number
-  -m, --model <model>        ollama model (default: "mistral")
-  -a, --api <api>            api host (default: "http://localhost:11434")
-  -l, --language <language>  response language (default: "English")
+  -V, --version                      output the version number
+  -m, --model <model>                ollama model (default: "mistral")
+  -a, --api <api>                    api host (default: "http://localhost:11434")
+  -l, --language <language>          response language (default: "English")
+  --max-diff-length <maxDiffLength>  max diff length (default: "8000")
   -s, --signature
   -v, --verbose
-  -h, --help                 display help for command
+  -h, --help                         display help for command
 ```
 
 ## Roadmap
@@ -40,9 +41,9 @@ Options:
 - [x] Support for multiple models
 - [x] Support for responses in different languages
 - [x] Support for remote ollama
+- [x] Support for max diff length
 - [ ] Support for model pulling selection
 - [ ] Support for force option
-- [ ] Support for max diff length
 - [ ] Support for template suggestion
 - [ ] Check default template
 
