@@ -9,21 +9,22 @@ import { ollamaPropt } from "./ollama";
 import { checkGitRepository, getDiff, createCommit } from "./git";
 
 async function main() {
-  logger.debug(`COMMIT PROVIDER: ${PROVIDER}`);
-  logger.debug(`COMMIT MODEL: ${options.model}\n`);
+  logger.info(`COMMIT PROVIDER: ${PROVIDER}`);
+  logger.info(`COMMIT MODEL: ${options.model}\n`);
 
   checkGitRepository();
 
   const diff = getDiff();
+  logger.start("Generating commit message...\n");
   const promptResponse = await ollamaPropt(diff);
   let commitMessage = convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
-  process.stdout.write(`========= result =========\n`);
+  logger.success(`✅ Commit message generation successful!\n`);
   process.stdout.write(`${commitMessage}\n`);
 
   const isContinue = await confirmContinue();
   if (!isContinue) {
-    process.stdout.write("Commit aborted by user 🙅‍♂️\n");
+    logger.info("Commit aborted by user 🙅‍♂️\n");
     process.exit(1);
   }
   createCommit(commitMessage);
@@ -31,6 +32,6 @@ async function main() {
 }
 
 main().catch((error: Error) => {
-  logger.error(error.message);
+  logger.error(error);
   process.exit(1);
 });

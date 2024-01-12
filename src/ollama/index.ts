@@ -21,6 +21,6 @@ export async function ollamaPropt(diff: string) {
     if (options.verbose) process.stdout.write(token);
     chunks.push(token);
   }
-  if (options.verbose) process.stdout.write("\n");
+  if (options.verbose) process.stdout.write("\n\n");
   return removeEscapeCharacters(chunks.join(""));
 }
