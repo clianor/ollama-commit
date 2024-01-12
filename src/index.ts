@@ -19,11 +19,11 @@ async function main() {
   let commitMessage = convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
   logger.success(`✅ Commit message generation successful!\n`);
-  process.stdout.write(`${commitMessage}\n\n`);
+  process.stdout.write(`${commitMessage}\n`);
 
   const isContinue = await logger.prompt("Do you want to continue?", {
     type: "confirm",
-    initial: false,
+    initial: true,
   });
   if (!isContinue) {
     logger.info("Commit aborted by user 🙅‍♂️\n");
