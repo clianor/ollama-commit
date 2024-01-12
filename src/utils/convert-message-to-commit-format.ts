@@ -9,6 +9,8 @@ export function convertMessageToCommitFormat(message: string) {
     commitBody += body.join("\n");
   }
 
-  const commitMessage = [commitSubject, commitBody].filter(Boolean).join("\n");
+  const commitMessage = [commitSubject, commitBody]
+    .filter(Boolean)
+    .join("\n\n");
   return commitMessage;
 }

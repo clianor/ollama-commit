@@ -9,8 +9,8 @@ import { ollamaPropt } from "./ollama";
 import { isGitRepository, getDiff, createCommit } from "./git";
 
 async function main() {
-  logger.debug("COMMIT PROVIDER", PROVIDER);
-  logger.debug("COMMIT MODEL", options.model, "\n");
+  logger.debug(`COMMIT PROVIDER: ${PROVIDER}`);
+  logger.debug(`COMMIT MODEL: ${options.model}\n`);
 
   if (!isGitRepository()) {
     logger.warn("This is not a git repository");
