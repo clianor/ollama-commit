@@ -17,10 +17,18 @@ async function main() {
 
   const diff = getDiff(+options.maxDiffLength);
   logger.start("Generating commit message...\n");
+
+  const startTime = Date.now();
   const promptResponse = await ollamaPropt(diff);
+  const endTime = Date.now();
+  const duration = (endTime - startTime) / 1000;
+
   let commitMessage = convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
   logger.success(`✅ Commit message generation successful!\n`);
+  logger.success(`✅ Commit message generation successful!`);
+  logger.success(`Generating commit message took ${duration} seconds.\n`);
+  logger.success(`🚀 Generating commit message took ${duration} seconds.\n`);
   process.stdout.write(`${commitMessage}\n`);
 
   const isContinue = await logger.prompt("Do you want to continue?", {
