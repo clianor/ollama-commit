@@ -2,25 +2,53 @@ import { SYSTEM_MESSAGE } from "../constants/prompt";
 import options from "../options";
 import { removeEscapeCharacters } from "../utils/remove-escape-characters";
 
-export async function ollamaPropt(diff: string) {
-  const { Ollama } = await import("ollama");
-  const ollama = new Ollama({
-    address: options.api,
-  });
+type OllamaParams = {
+  model: string;
+  prompt: string;
+  system?: string;
+  options?: {
+    temperature?: number;
+    num_ctx?: number;
+    top_k?: number;
+    top_p?: number;
+  };
+};
 
-  const chunks: string[] = [];
-  for await (const token of ollama.generate(options.model, diff, {
+export async function ollamaPropt(diff: string) {
+  const body: OllamaParams = {
+    model: options.model,
+    prompt: diff,
     system: SYSTEM_MESSAGE,
-    parameters: {
+    options: {
       temperature: 0,
       num_ctx: 4096,
       top_k: 20,
       top_p: 0.4,
     },
-  })) {
-    if (options.verbose) process.stdout.write(token);
-    chunks.push(token);
+  };
+
+  const response = await fetch(`${options.api}/api/generate`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+  const reader = response.body?.getReader();
+  if (!reader) {
+    throw new Error("Failed to read response body");
+  }
+  let content = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
+    }
+    const rawjson = new TextDecoder().decode(value);
+    const json = JSON.parse(rawjson);
+
+    if (json.done === false) {
+      if (options.verbose) process.stdout.write(json.response);
+      content += json.response;
+    }
   }
   if (options.verbose) process.stdout.write("\n\n");
-  return removeEscapeCharacters(chunks.join(""));
+  return removeEscapeCharacters(content);
 }
