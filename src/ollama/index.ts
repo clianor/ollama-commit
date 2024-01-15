@@ -6,9 +6,20 @@ type OllamaParams = {
   model: string;
   prompt: string;
   system?: string;
+  format?: "json";
   options?: {
-    temperature?: number;
+    mirostat?: number;
+    mirostat_eta?: number;
+    mirostat_tau?: number;
     num_ctx?: number;
+    num_gqa?: number;
+    num_gpu?: number;
+    num_thread?: number;
+    repeat_last_n?: number;
+    repeat_penalty?: number;
+    temperature?: number;
+    tfs_z?: number;
+    num_predict?: number;
     top_k?: number;
     top_p?: number;
   };
@@ -18,10 +29,11 @@ export async function ollamaPropt(diff: string) {
   const body: OllamaParams = {
     model: options.model,
     prompt: diff,
+    format: "json",
     system: SYSTEM_MESSAGE,
     options: {
-      temperature: 0,
       num_ctx: 4096,
+      temperature: 0,
       top_k: 20,
       top_p: 0.4,
     },

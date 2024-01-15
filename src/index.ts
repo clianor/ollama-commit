@@ -10,6 +10,7 @@ import { checkGitRepository, getDiff, createCommit } from "./git";
 async function main() {
   logger.info(`AI PROVIDER: ${PROVIDER}`);
   logger.info(`AI MODEL: ${options.model}`);
+  logger.info(`API HOST: ${options.api}`);
   logger.info(`LANGUAGE: ${options.language}`);
   logger.info(`MAX DIFF LENGTH: ${options.maxDiffLength}\n`);
 
@@ -25,9 +26,7 @@ async function main() {
 
   let commitMessage = convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
-  logger.success(`✅ Commit message generation successful!\n`);
   logger.success(`✅ Commit message generation successful!`);
-  logger.success(`Generating commit message took ${duration} seconds.\n`);
   logger.success(`🚀 Generating commit message took ${duration} seconds.\n`);
   process.stdout.write(`${commitMessage}\n`);
 
