@@ -4,8 +4,8 @@ import { convertMessageToCommitFormat } from "./utils/convert-message-to-commit-
 import options from "./options";
 import { PROVIDER } from "./constants";
 import logger from "./utils/logger";
-import { ollamaPropt } from "./ollama";
-import { checkGitRepository, getDiff, createCommit } from "./git";
+import { ollamaPrompt } from "./ollama";
+import { checkGitRepository, createCommit, getDiff } from "./git";
 
 async function main() {
   logger.info(`AI PROVIDER: ${PROVIDER}`);
@@ -17,10 +17,15 @@ async function main() {
   checkGitRepository();
 
   const diff = getDiff(+options.maxDiffLength);
+  logger.start(
+    `The currently prepared commit diff is ${Intl.NumberFormat("en-US").format(
+      diff.length
+    )} characters long.`
+  );
   logger.start("Generating commit message...\n");
 
   const startTime = Date.now();
-  const promptResponse = await ollamaPropt(diff);
+  const promptResponse = await ollamaPrompt(diff);
   const endTime = Date.now();
   const duration = (endTime - startTime) / 1000;
 

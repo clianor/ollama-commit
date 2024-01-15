@@ -25,14 +25,14 @@ type OllamaParams = {
   };
 };
 
-export async function ollamaPropt(diff: string) {
+export async function ollamaPrompt(diff: string) {
   const body: OllamaParams = {
     model: options.model,
     prompt: diff,
     format: "json",
     system: SYSTEM_MESSAGE,
     options: {
-      num_ctx: 4096,
+      num_ctx: Math.ceil(diff.length / 8000) * 4096,
       temperature: 0,
       top_k: 20,
       top_p: 0.4,
@@ -54,11 +54,15 @@ export async function ollamaPropt(diff: string) {
       break;
     }
     const rawjson = new TextDecoder().decode(value);
-    const json = JSON.parse(rawjson);
+    try {
+      const json = JSON.parse(rawjson);
 
-    if (json.done === false) {
-      if (options.verbose) process.stdout.write(json.response);
-      content += json.response;
+      if (json.done === false) {
+        if (options.verbose) process.stdout.write(json.response);
+        content += json.response;
+      }
+    } catch {
+      break;
     }
   }
   if (options.verbose) process.stdout.write("\n\n");
