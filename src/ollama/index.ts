@@ -32,7 +32,7 @@ export async function ollamaPrompt(diff: string) {
     format: "json",
     system: SYSTEM_MESSAGE,
     options: {
-      num_ctx: Math.ceil(diff.length / 8000) * 4096,
+      num_ctx: Math.ceil(diff.length / 8000) * 4096 + 2048,
       temperature: 0,
       top_k: 20,
       top_p: 0.4,
