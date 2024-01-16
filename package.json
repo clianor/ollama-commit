@@ -19,6 +19,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "start": "pnpm run build && dist/index.cjs -sv",
     "version:patch": "npm version patch && pnpm run build && pnpm publish",
     "version:minor": "npm version minor && pnpm run build && pnpm publish",
     "version:major": "npm version major && pnpm run build && pnpm publish"
