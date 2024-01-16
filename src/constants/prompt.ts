@@ -19,5 +19,6 @@ export const SYSTEM_MESSAGE = [
   `For "body", this is the part that describes the details of the commit in the present tense.`,
   `If "body" is multiple sentences, it is expressed as a string array.`,
   `"body" is optional.`,
+  `Don't respond to new lines unnecessarily.`,
   `You must respond in ${options.language}.`,
 ].join(" ");

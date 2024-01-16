@@ -32,10 +32,13 @@ export async function ollamaPrompt(diff: string) {
     format: "json",
     system: SYSTEM_MESSAGE,
     options: {
+      mirostat: 2,
+      mirostat_tau: 2,
       num_ctx: Math.ceil(diff.length / 8000) * 4096 + 2048,
-      temperature: 0,
+      temperature: 0.2,
+      tfs_z: 5,
       top_k: 20,
-      top_p: 0.4,
+      top_p: 0.5,
     },
   };
 
