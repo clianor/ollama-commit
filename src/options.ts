@@ -14,7 +14,11 @@ program
   .description("Automatic commit generator using Ollama.")
   .option("-m, --model <model>", "ollama model", DEFAULT_MODEL)
   .option("-a, --api <api>", "api host", DEFAULT_API_HOST)
-  .option("-l, --language <language>", "response language", DEFAULT_LANGUAGE)
+  .option(
+    "-l, --language <language>",
+    "the string of the language to translate to. It can be in any of the two ISO 639 (1 or 2) or the full name in English like Spanish.",
+    DEFAULT_LANGUAGE
+  )
   .option(
     "--max-diff-length <maxDiffLength>",
     "max diff length",

@@ -29,7 +29,7 @@ async function main() {
   const endTime = Date.now();
   const duration = (endTime - startTime) / 1000;
 
-  let commitMessage = convertMessageToCommitFormat(promptResponse);
+  let commitMessage = await convertMessageToCommitFormat(promptResponse);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
   logger.success(`✅ Commit message generation successful!`);
   logger.success(`🚀 Generating commit message took ${duration} seconds.\n`);

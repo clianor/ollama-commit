@@ -17,6 +17,9 @@ dependencies:
   ollama:
     specifier: ^0.3.0
     version: 0.3.0
+  translate:
+    specifier: ^2.0.2
+    version: 2.0.2
   tsup:
     specifier: ^8.0.1
     version: 8.0.1(typescript@5.3.3)
@@ -934,6 +937,10 @@ packages:
     resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
       punycode: 2.3.1
+    dev: false
+
+  /translate@2.0.2:
+    resolution: {integrity: sha512-K07zjM146c2RYbdlG0xCNGkE6WPdcWjdWX55SOpHzgIq9Elj+LvvXDAfbeQ8gSfkrluaGahnNv2pYfq82UiBDQ==}
     dev: false
 
   /tree-kill@1.2.2:

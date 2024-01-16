@@ -20,5 +20,6 @@ export const SYSTEM_MESSAGE = [
   `If "body" is multiple sentences, it is expressed as a string array.`,
   `"body" is optional.`,
   `Don't respond to new lines unnecessarily.`,
-  `You must respond in ${options.language}.`,
+  // `You must respond in ${options.language}.`,
+  // `You have to respond to the subject as Korean.`,
 ].join(" ");
