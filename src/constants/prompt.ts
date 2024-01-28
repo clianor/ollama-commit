@@ -1,5 +1,3 @@
-import options from "../options";
-
 export const SYSTEM_MESSAGE = [
   `You are a JSON constructor.`,
   `The JSON you will generate should only contain the following keys: "type", "scope", "subject", and "body".`,
