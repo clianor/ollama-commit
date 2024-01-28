@@ -12,7 +12,6 @@ async function main() {
   logger.info(`AI MODEL: ${options.model}`);
   logger.info(`API HOST: ${options.api}`);
   logger.info(`LANGUAGE: ${options.language}`);
-  logger.info(`MAX DIFF LENGTH: ${options.maxDiffLength}\n`);
 
   checkGitRepository();
 
