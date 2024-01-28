@@ -1,5 +1,6 @@
 import { SYSTEM_MESSAGE } from "../constants/prompt";
 import options from "../options";
+import { getTokenCount } from "../utils/get-token-count";
 import { removeEscapeCharacters } from "../utils/remove-escape-characters";
 
 type OllamaParams = {
@@ -32,9 +33,7 @@ export async function ollamaPrompt(diff: string) {
     format: "json",
     system: SYSTEM_MESSAGE,
     options: {
-      mirostat: 2,
-      mirostat_tau: 2,
-      num_ctx: Math.ceil(diff.length / 8000) * 4096 + 2048,
+      num_ctx: getTokenCount(SYSTEM_MESSAGE) + getTokenCount(diff) + 1024,
       temperature: 0.2,
       tfs_z: 5,
       top_k: 20,
