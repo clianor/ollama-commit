@@ -5,11 +5,15 @@ export async function convertMessageToCommitFormat(message: string) {
 
   const { type, scope, subject, body = [] } = JSON.parse(message);
 
-  const translatedContent = await Promise.all(
-    [subject, ...(typeof body === "string" ? [body] : body)]
-      .map((str: string) => str.replaceAll("'", "`"))
-      .map((str) => translate(str, { engine: "google", to: options.language }))
-  );
+  const translatedContent = (
+    await Promise.all(
+      [subject, ...(typeof body === "string" ? [body] : body)]
+        .map((str: string) => str.replaceAll("'", "`"))
+        .map((str: string) =>
+          translate(str, { engine: "google", to: options.language })
+        )
+    )
+  ).map((str: string) => str.replaceAll("`", "'"));
 
   const commitSubject = `${type}${
     scope ? `(${scope})` : ""
