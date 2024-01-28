@@ -14,9 +14,6 @@ dependencies:
   consola:
     specifier: ^3.2.3
     version: 3.2.3
-  ollama:
-    specifier: ^0.3.0
-    version: 0.3.0
   translate:
     specifier: ^2.0.2
     version: 2.0.2
@@ -753,10 +750,6 @@ packages:
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /ollama@0.3.0:
-    resolution: {integrity: sha512-+eaNmtirwiAcfLW84RUZA2rhEwl7pOtLJ39zTVkBWRbRQ1Q1JubTf1k/wmxvICs1APVA+iYgYeYif0n5GUflhw==}
     dev: false
 
   /once@1.4.0:

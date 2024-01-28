@@ -37,7 +37,6 @@
     "@types/node": "^20.10.4",
     "commander": "^11.1.0",
     "consola": "^3.2.3",
-    "ollama": "^0.3.0",
     "translate": "^2.0.2",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
