@@ -1,12 +1,7 @@
 import { Command } from "commander";
 
 import { version } from "../package.json";
-import {
-  DEFAULT_API_HOST,
-  DEFAULT_LANGUAGE,
-  DEFAULT_MAX_DIFF_LENGTH,
-  DEFAULT_MODEL,
-} from "./constants";
+import { DEFAULT_API_HOST, DEFAULT_LANGUAGE, DEFAULT_MODEL } from "./constants";
 
 const program = new Command();
 program
@@ -18,11 +13,6 @@ program
     "-l, --language <language>",
     "the string of the language to translate to. It can be in any of the two ISO 639 (1 or 2) or the full name in English like Spanish.",
     DEFAULT_LANGUAGE
-  )
-  .option(
-    "--max-diff-length <maxDiffLength>",
-    "max diff length",
-    DEFAULT_MAX_DIFF_LENGTH
   )
   .option("-s, --signature")
   .option("-v, --verbose")
