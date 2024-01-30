@@ -30,7 +30,6 @@ Options:
   -m, --model <model>                ollama model (default: "mistral")
   -a, --api <api>                    api host (default: "http://localhost:11434")
   -l, --language <language>          the string of the language to translate to. It can be in any of the two ISO 639 (1 or 2) or the full name in English like Spanish. (default: "en")
-  --max-diff-length <maxDiffLength>  max diff length (default: "8000")
   -s, --signature
   -v, --verbose
   -h, --help                         display help for command
@@ -41,7 +40,6 @@ Options:
 - [x] Support for multiple models
 - [x] Support for responses in different languages
 - [x] Support for remote ollama
-- [x] Support for max diff length
 - [ ] Support for model pulling selection
 - [ ] Support for force option
 - [ ] Support for template suggestion
