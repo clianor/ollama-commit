@@ -14,7 +14,7 @@ export function checkGitRepository() {
 
 export function getDiff(maxDiffLength: number) {
   const diff = execSync(
-    "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml'"
+    "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock' ':(exclude)pnpm-lock.yaml' ':(exclude)bun.lockb'"
   ).toString();
 
   if (!diff) {
