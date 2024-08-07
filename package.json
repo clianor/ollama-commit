@@ -36,11 +36,15 @@
   "license": "MIT",
   "homepage": "https://github.com/clianor/ollama-commit",
   "dependencies": {
+    "@langchain/community": "0.2.24",
+    "@langchain/core": "0.2.18",
+    "@langchain/ollama": "0.0.2",
     "@types/node": "^20.10.4",
     "commander": "^11.1.0",
     "consola": "^3.2.3",
     "translate": "^2.0.2",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zod": "3.23.8"
   }
 }
