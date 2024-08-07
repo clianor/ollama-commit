@@ -18,6 +18,8 @@
   ],
   "scripts": {
     "build": "tsup",
+    "commit": "node dist/index.cjs --model mistral --language en --signature",
+    "precommit": "pnpm run build",
     "dev": "tsup --watch",
     "start": "pnpm run build && dist/index.cjs -sv",
     "version:patch": "npm version patch && pnpm run build && pnpm publish",
