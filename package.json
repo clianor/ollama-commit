@@ -1,6 +1,6 @@
 {
   "name": "ollama-commit",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "type": "module",
   "description": "Commit message generator with Ollama",
   "repository": {
