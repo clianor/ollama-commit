@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "commit": "node dist/index.cjs --model mistral --language en --signature",
+    "commit": "node dist/index.cjs --api http://oraclian.duckdns.org:11434 --model mistral --language en --signature",
     "precommit": "pnpm run build",
     "dev": "tsup --watch",
     "start": "pnpm run build && dist/index.cjs -sv",

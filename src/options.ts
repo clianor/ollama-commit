@@ -1,7 +1,11 @@
 import { Command } from "commander";
 
 import { version } from "../package.json";
-import { DEFAULT_API_HOST, DEFAULT_LANGUAGE, DEFAULT_MODEL } from "./constants";
+import {
+  DEFAULT_API_HOST,
+  DEFAULT_LANGUAGE,
+  DEFAULT_MODEL,
+} from "./constants/config";
 
 const program = new Command();
 program

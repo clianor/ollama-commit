@@ -1,72 +1,30 @@
-import { SYSTEM_MESSAGE } from "../constants/prompt";
+import { ChatOllama } from "@langchain/ollama";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 import options from "../options";
-import { getTokenCount } from "../utils/get-token-count";
-import { removeEscapeCharacters } from "../utils/remove-escape-characters";
-
-type OllamaParams = {
-  model: string;
-  prompt: string;
-  system?: string;
-  format?: "json";
-  options?: {
-    mirostat?: number;
-    mirostat_eta?: number;
-    mirostat_tau?: number;
-    num_ctx?: number;
-    num_gqa?: number;
-    num_gpu?: number;
-    num_thread?: number;
-    repeat_last_n?: number;
-    repeat_penalty?: number;
-    temperature?: number;
-    tfs_z?: number;
-    num_predict?: number;
-    top_k?: number;
-    top_p?: number;
-  };
-};
+import { commitSchema } from "../constants/schema";
 
 export async function ollamaPrompt(diff: string) {
-  const body: OllamaParams = {
+  const prompt = ChatPromptTemplate.fromMessages([
+    [
+      "system",
+      "Generate an appropriate conventional commit message based on the output of the git diff --cached command.",
+    ],
+    ["human", "{diff}"],
+  ]);
+
+  const model = new ChatOllama({
+    baseUrl: options.api,
     model: options.model,
-    prompt: diff,
+    checkOrPullModel: true,
     format: "json",
-    system: SYSTEM_MESSAGE,
-    options: {
-      num_ctx: getTokenCount(SYSTEM_MESSAGE) + getTokenCount(diff) + 1024,
-      temperature: 0.2,
-      tfs_z: 5,
-      top_k: 20,
-      top_p: 0.5,
-    },
-  };
-
-  const response = await fetch(`${options.api}/api/generate`, {
-    method: "POST",
-    body: JSON.stringify(body),
+    temperature: 0.2,
   });
-  const reader = response.body?.getReader();
-  if (!reader) {
-    throw new Error("Failed to read response body");
-  }
-  let content = "";
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) {
-      break;
-    }
-    const rawjson = new TextDecoder().decode(value);
-    try {
-      const json = JSON.parse(rawjson);
 
-      if (json.done === false) {
-        if (options.verbose) process.stdout.write(json.response);
-        content += json.response;
-      }
-    } catch {
-      break;
-    }
-  }
-  if (options.verbose) process.stdout.write("\n\n");
-  return removeEscapeCharacters(content);
+  const structuredModel = model.withStructuredOutput(commitSchema, {
+    name: "generate_commit",
+    method: "functionCalling",
+  });
+
+  const chain = prompt.pipe(structuredModel);
+  return chain.invoke({ diff });
 }

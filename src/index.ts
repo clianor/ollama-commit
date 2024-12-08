@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { convertMessageToCommitFormat } from "./utils/convert-message-to-commit-format";
+import { translateAndFormatCommitMessage } from "./utils/translate-and-format-commit-message";
 import options from "./options";
-import { PROVIDER } from "./constants";
+import { PROVIDER } from "./constants/config";
 import logger from "./utils/logger";
 import { ollamaPrompt } from "./ollama";
 import { checkGitRepository, createCommit, getDiff } from "./git";
+import { getTokenCount } from "./utils/get-token-count";
 
 async function main() {
   logger.info(`AI PROVIDER: ${PROVIDER}`);
@@ -16,19 +17,18 @@ async function main() {
   checkGitRepository();
 
   const diff = getDiff(+options.maxDiffLength);
+  const tokenCount = await getTokenCount(diff);
   logger.start(
-    `The currently prepared commit diff is ${Intl.NumberFormat("en-US").format(
-      diff.length
-    )} characters long.`
+    `The currently prepared commit diff is ${tokenCount.toLocaleString()} tokens.`
   );
   logger.start("Generating commit message...\n");
 
   const startTime = Date.now();
-  const promptResponse = await ollamaPrompt(diff);
+  const promptResult = await ollamaPrompt(diff);
   const endTime = Date.now();
   const duration = (endTime - startTime) / 1000;
 
-  let commitMessage = await convertMessageToCommitFormat(promptResponse);
+  let commitMessage = await translateAndFormatCommitMessage(promptResult);
   if (options.signature) commitMessage += "\n\nmade by ollama-commit";
   logger.success(`✅ Commit message generation successful!`);
   logger.success(`🚀 Generating commit message took ${duration} seconds.\n`);
